@@ -1,0 +1,235 @@
+import { useState, useEffect, useMemo } from "react";
+import { ChevronRight, Sparkles, Heart } from "lucide-react";
+import confetti from "canvas-confetti";
+
+import { HeroCarousel } from "@/components/HeroCarousel";
+import { ImageModal } from "@/components/ImageModal";
+import { Skeleton } from "@/components/ui/skeleton";
+import { VideoCard } from "@/components/VideoCard";
+import { carouselSlides, photoGallery } from "@/data/feedpage";
+
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
+// Cloudinary optimization helper
+const getOptimizedUrl = (url: string, width: number = 500) => {
+  if (!url || !url.includes("cloudinary.com")) return url;
+  return url.replace("/upload/", `/upload/c_scale,w_${width},f_auto,q_auto/`);
+};
+
+export default function FeedPage() {
+  // Modal Index States
+  const [activeGalleryType, setActiveGalleryType] = useState<
+    "featured" | "gallery" | null
+  >(null);
+  const [activeIndex, setActiveIndex] = useState<number>(-1);
+
+  // Simulated loading state for the skeleton loaders
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const triggerConfetti = () => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.8 },
+      colors: ["#f59e0b", "#10b981", "#ec4899", "#3b82f6", "#ffffff"],
+    });
+  };
+
+  // Extracts classmate names and cleanly discards Cloudinary random hashes & numbers
+  const getAuthorFromUrl = (url: string): string | null => {
+    if (!url || !url.includes("_-_")) return null;
+    try {
+      // 1. Get the filename without extension (e.g., "Sefia_szuvsf" or "Donald_Spore_1_ltn4k9")
+      const filename = url.split("/").pop() || "";
+      const nameSection = filename.split("_-_")[1].split(".")[0];
+
+      // 2. Split into individual words
+      const parts = nameSection.split("_");
+
+      // 3. Remove the last element if it is a 6-character Cloudinary hash (like "szuvsf")
+      if (parts.length > 1) {
+        const lastPart = parts[parts.length - 1];
+        if (lastPart.length === 6 || /^[a-z0-9]{6}$/i.test(lastPart)) {
+          parts.pop(); // Toss the random hash out!
+        }
+      }
+
+      // 4. Filter out any isolated numbers (like "1" in Donald_Spore_1)
+      const cleanParts = parts.filter(
+        (part) => isNaN(Number(part)) && part.length > 0,
+      );
+
+      // 5. Capitalize nicely
+      return cleanParts
+        .map(
+          (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
+        )
+        .join(" ");
+    } catch (error) {
+      console.error("Error parsing name from URL:", error);
+      return null;
+    }
+  };
+
+  // Safe Memoized Items for Lightbox Modal
+  const galleryItems = useMemo(() => {
+    return photoGallery.map((item) => {
+      const author = getAuthorFromUrl(item.url);
+      return {
+        id: item.id,
+        imageUrl: item.url.includes("cloudinary.com")
+          ? item.url.replace(
+              "/upload/",
+              "/upload/c_scale,w_1200,f_auto,q_auto/",
+            )
+          : item.url,
+        title: author
+          ? `Captured by ${author}`
+          : "Memories that never fade ❤️✨",
+        extra: item.caption, // Keeps descriptions in the modal view
+      };
+    });
+  }, []);
+
+  // Determine active item list to pass to modal
+  const modalItems = galleryItems;
+
+  const handleOpenPhoto = (
+    galleryType: "featured" | "gallery",
+    index: number,
+  ) => {
+    setActiveGalleryType(galleryType);
+    setActiveIndex(index);
+    triggerConfetti();
+  };
+
+  const handleCloseModal = () => {
+    setActiveGalleryType(null);
+    setActiveIndex(-1);
+  };
+
+  return (
+    <div className="w-full min-h-screen bg-slate-50/50 pb-12">
+      <div className="max-w-7xl">
+        {/* 1. REUSABLE HERO CAROUSEL */}
+        <div className="mb-8">
+          <HeroCarousel slides={carouselSlides} autoPlayInterval={6000} />
+        </div>
+
+        {/* 2. VIDEO SPOTLIGHT SECTION */}
+        <div className="py-6">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <span className="text-xs font-bold text-rose-600 uppercase tracking-widest flex items-center gap-1.5">
+                <Sparkles className="size-3.5 fill-current" /> Featured
+                Spotlight
+              </span>
+              {/* Heading styled with Display Font */}
+              <h2 className="text-2xl md:text-3xl font-display font-black text-slate-900 mt-1">
+                Highlights from Art/Commercial Class
+              </h2>
+            </div>
+            <button
+              onClick={triggerConfetti}
+              className="p-2 hover:bg-slate-100 rounded-full transition-colors group"
+            >
+              <ChevronRight className="size-6 text-slate-500 group-hover:text-slate-900 transition-colors" />
+            </button>
+          </div>
+
+          <VideoCard
+            videoUrl="https://res.cloudinary.com/dwuq9g7x7/video/upload/f_auto,q_auto/v1784213176/Graduation1_gtxp9a.mp4"
+            posterImageUrl="https://res.cloudinary.com/dwuq9g7x7/video/upload/c_scale,w_720,f_auto,q_auto/v1784213176/Graduation1_gtxp9a.jpg"
+            title="Graduation Day Memories 🎓"
+          />
+        </div>
+
+        {/* 3. MASONRY PHOTO GALLERY */}
+        <div className="py-8 border-t border-slate-200/60 mt-4">
+          <div className="flex items-center gap-2 mb-6">
+            <div>
+              <span className="text-xs font-bold text-rose-600 uppercase tracking-widest flex items-center gap-1.5">
+                <Sparkles className="size-3.5 fill-current" /> Forever Memories
+              </span>
+              {/* Heading styled with Display Font */}
+              <h2 className="text-2xl md:text-3xl font-display font-black text-slate-900 mt-1">
+                Classmate Uploads
+              </h2>
+            </div>
+          </div>
+
+          <div className="columns-2 md:columns-4 gap-4 space-y-4">
+            {isLoading
+              ? Array.from({ length: 8 }).map((_, index) => {
+                  const heights = ["h-64", "h-80", "h-52", "h-72"];
+                  const randomHeight = heights[index % heights.length];
+                  return (
+                    <div
+                      key={index}
+                      className="break-inside-avoid mb-4 overflow-hidden rounded-xl"
+                    >
+                      <Skeleton
+                        className={`${randomHeight} w-full rounded-none`}
+                      />
+                    </div>
+                  );
+                })
+              : photoGallery.map((photo, idx) => {
+                  const authorName = getAuthorFromUrl(photo.url);
+
+                  return (
+                    <div
+                      key={photo.id}
+                      onClick={() => handleOpenPhoto("gallery", idx)}
+                      className="break-inside-avoid mb-4 group relative overflow-hidden rounded-xl shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-md cursor-pointer bg-slate-200/40"
+                    >
+                      <LazyLoadImage
+                        alt={photo.caption}
+                        src={getOptimizedUrl(photo.url, 450)}
+                        effect="blur"
+                        threshold={350}
+                        wrapperClassName="w-full h-auto block min-h-[180px] bg-slate-200/30"
+                        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105 select-none"
+                      />
+
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-4 flex flex-col justify-end text-white transition-opacity duration-300 pointer-events-none">
+                        {/* Styled attribution string with display font elements */}
+                        <p
+                          className={`text-xs font-bold tracking-wide mb-1 drop-shadow-sm text-amber-400  "font-display italic"`}
+                        >
+                          {authorName
+                            ? `Captured by ${authorName}`
+                            : "Memories that never fade ❤️✨"}
+                        </p>
+
+                        <div className="flex items-center gap-1.5 text-rose-500">
+                          <Heart className="size-4 fill-current drop-shadow-sm" />
+                          <span className="text-[10px] text-white font-bold drop-shadow-sm">
+                            {photo.likes}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+          </div>
+        </div>
+
+        {/* 4. SLIDER-SUPPORTING IMAGE LIGHTBOX */}
+        <ImageModal
+          isOpen={activeGalleryType !== null && activeIndex !== -1}
+          currentIndex={activeIndex}
+          items={modalItems}
+          onIndexChange={(newIndex) => setActiveIndex(newIndex)}
+          onClose={handleCloseModal}
+        />
+      </div>
+    </div>
+  );
+}
