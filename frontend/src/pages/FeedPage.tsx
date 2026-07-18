@@ -234,7 +234,7 @@ export default function FeedPage() {
           </div>
 
           {/* Text styled with the elegant Display Font */}
-          <p className="text-2xl md:text-3xl font-display font-black text-slate-900 leading-tight">
+          <p className="text-xl md:text-3xl font-display font-black text-slate-900 leading-tight">
             It's been an unforgettable journey.
             <br />
             <span className="bg-linear-to-r from-amber-500 via-amber-600 to-rose-500 bg-clip-text text-transparent">

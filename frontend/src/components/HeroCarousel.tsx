@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo } from "react"; // 1. Import useMemo
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
@@ -25,7 +25,7 @@ export function HeroCarousel({
   slides,
   autoPlayInterval = 5000,
 }: HeroCarouselProps) {
-  // Safely initialize the Autoplay plugin with useMemo
+  // 2. Safely initialize the Autoplay plugin with useMemo
   const autoplayPlugin = useMemo(
     () => Autoplay({ delay: autoPlayInterval, stopOnInteraction: false }),
     [autoPlayInterval],
@@ -37,17 +37,18 @@ export function HeroCarousel({
   return (
     <div className="relative w-full overflow-hidden rounded-3xl">
       <Carousel
+        // 3. Pass the memoized plugin cleanly without accessing refs during render
         plugins={[autoplayPlugin]}
         opts={{
           loop: true,
         }}
         className="w-full group"
       >
-        <CarouselContent className="ml-0">
+        <CarouselContent className="-ml-0">
           {slides.map((slide, index) => (
             <CarouselItem
               key={index}
-              className="pl-0 relative w-full h-[80dvh] sm:h-auto sm:aspect-16/10 md:aspect-21/9 lg:aspect-3/1"
+              className="pl-0 relative w-full aspect-[4/5] sm:aspect-[16/10] md:aspect-[21/9] lg:aspect-[3/1]"
             >
               {/* Background Image */}
               {slide.imageUrl ? (
@@ -63,16 +64,15 @@ export function HeroCarousel({
               )}
 
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20" />
 
               {/* Text Overlay */}
               <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-6 text-center text-white z-10">
                 <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-widest uppercase text-amber-400 drop-shadow-sm">
                   {slide.category}
                 </span>
-
                 <h1
-                  className="mt-2 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-tight leading-tight md:leading-tight drop-shadow-md max-w-sm sm:max-w-xl md:max-w-3xl"
+                  className="mt-2 text-2xl sm:text-3xl md:text-5xl font-black tracking-tight leading-tight md:leading-none drop-shadow-md max-w-sm sm:max-w-xl md:max-w-3xl"
                   dangerouslySetInnerHTML={{ __html: slide.title }}
                 />
               </div>

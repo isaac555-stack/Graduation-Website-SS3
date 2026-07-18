@@ -3,8 +3,6 @@ import {
   Home,
   MessageSquare,
   User,
-  LogOut,
-  Settings,
   Music,
   VolumeX,
   Info,
@@ -21,7 +19,6 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarFooter,
   SidebarInset,
 } from "@/components/ui/sidebar";
 
@@ -136,37 +133,6 @@ export function DashboardLayout({
               <span className="font-display font-black text-xl tracking-tight bg-linear-to-r from-amber-500 to-amber-700 bg-clip-text text-transparent">
                 SS3 Class 2k26
               </span>
-
-              <div className="relative">
-                <button
-                  onClick={toggleMusic}
-                  title={isPlaying ? "Pause Anthem" : "Play Anthem"}
-                  className={`p-2 rounded-full border transition-all cursor-pointer ${
-                    isPlaying
-                      ? "bg-amber-50 border-amber-200 text-amber-600 animate-pulse"
-                      : "bg-slate-50 border-slate-200 text-slate-400 hover:text-slate-600"
-                  }`}
-                >
-                  {isPlaying ? (
-                    <VolumeX className="size-4" />
-                  ) : (
-                    <Music className="size-4" />
-                  )}
-                </button>
-
-                {/* DESKTOP FLOATING PROMPT BANNER */}
-                {!isPlaying && showMusicPrompt && (
-                  <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 w-48 bg-slate-900 text-white p-3 rounded-xl shadow-xl text-xs font-medium z-50 border border-slate-800 animate-in fade-in slide-in-from-left-2 duration-300">
-                    <div className="absolute top-1/2 -left-1.5 -translate-y-1/2 w-3 h-3 bg-slate-900 rotate-45 border-l border-b border-slate-800" />
-                    <p className="flex items-center gap-1.5 text-amber-400 font-bold mb-0.5">
-                      <Sparkles className="size-3.5 shrink-0" /> Turn On Anthem!
-                    </p>
-                    <span className="text-slate-400 text-[11px]">
-                      Tap to catch the true graduation feeling. ✨
-                    </span>
-                  </div>
-                )}
-              </div>
             </div>
           </SidebarHeader>
 
@@ -194,30 +160,6 @@ export function DashboardLayout({
               </SidebarGroupContent>
             </SidebarGroup>
           </SidebarContent>
-
-          <SidebarFooter className="p-4 border-t border-slate-100">
-            <SidebarMenu className="space-y-1">
-              <SidebarMenuItem>
-                <SidebarMenuButton
-                  onClick={() => console.log("Settings Clicked")}
-                  className="w-full flex items-center gap-3 px-3 py-5 rounded-xl text-sm font-semibold text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition-colors cursor-pointer"
-                >
-                  <Settings className="size-5 shrink-0" />
-                  <span>Settings</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-
-              <SidebarMenuItem>
-                <SidebarMenuButton
-                  onClick={() => console.log("Logout Clicked")}
-                  className="w-full flex items-center gap-3 px-3 py-5 rounded-xl text-sm font-semibold text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors cursor-pointer"
-                >
-                  <LogOut className="size-5 shrink-0" />
-                  <span>Logout</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarFooter>
         </Sidebar>
 
         {/* MAIN CONTENT AREA */}
@@ -260,36 +202,36 @@ export function DashboardLayout({
         </SidebarInset>
 
         {/* MOBILE BOTTOM NAVIGATION + FLOATING MUSIC SWITCH */}
-        <div className="md:hidden">
-          <div className="fixed bottom-24 right-4 z-50 flex flex-col items-end gap-3">
-            {/* MOBILE FLOATING PROMPT BANNER */}
-            {!isPlaying && showMusicPrompt && (
-              <div className="mr-1 max-w-200px bg-slate-900 text-white p-3 rounded-2xl shadow-xl text-xs font-medium border border-slate-800 animate-in fade-in slide-in-from-bottom-2 duration-300">
-                <p className="flex items-center gap-1.5 text-amber-400 font-bold mb-0.5">
-                  <Sparkles className="size-3.5" /> Turn On Music!
-                </p>
-                <span className="text-slate-400 text-[11px]">
-                  Tap the button below for the true feeling.
-                </span>
-              </div>
+
+        <div className="fixed bottom-24 right-4 z-50 flex flex-col items-end gap-3">
+          {/* MOBILE FLOATING PROMPT BANNER */}
+          {!isPlaying && showMusicPrompt && (
+            <div className="mr-1 max-w-200px bg-slate-900 text-white p-3 rounded-2xl shadow-xl text-xs font-medium border border-slate-800 animate-in fade-in slide-in-from-bottom-2 duration-300">
+              <p className="flex items-center gap-1.5 text-amber-400 font-bold mb-0.5">
+                <Sparkles className="size-3.5" /> Turn On Music!
+              </p>
+              <span className="text-slate-400 text-[11px]">
+                Tap the button below for the true feeling.
+              </span>
+            </div>
+          )}
+
+          <button
+            onClick={toggleMusic}
+            className={`p-3.5 rounded-full shadow-lg border transition-all cursor-pointer ${
+              isPlaying
+                ? "bg-amber-500 border-amber-600 text-white animate-pulse"
+                : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50"
+            }`}
+          >
+            {isPlaying ? (
+              <VolumeX className="size-5" />
+            ) : (
+              <Music className="size-5" />
             )}
-
-            <button
-              onClick={toggleMusic}
-              className={`p-3.5 rounded-full shadow-lg border transition-all cursor-pointer ${
-                isPlaying
-                  ? "bg-amber-500 border-amber-600 text-white animate-pulse"
-                  : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50"
-              }`}
-            >
-              {isPlaying ? (
-                <VolumeX className="size-5" />
-              ) : (
-                <Music className="size-5" />
-              )}
-            </button>
-          </div>
-
+          </button>
+        </div>
+        <div className="md:hidden">
           <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-100 px-6 py-3.5 flex justify-between items-center z-40">
             {navItems.map((item) => {
               const Icon = item.icon;

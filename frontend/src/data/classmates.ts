@@ -6,7 +6,7 @@ export interface Classmate {
   quote: string;
   rememberedFor: string;
   futureAmbition: string;
-  positionHeld?: string; // Added field for school positions
+  positionHeld?: string;
 }
 
 export const classmatesData: Classmate[] = [
@@ -126,7 +126,8 @@ export const classmatesData: Classmate[] = [
     id: "chinedu-victory",
     name: "Chinedu Victory",
     nickname: "Cloudy T",
-    imageUrl: "",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784367524/Screenshot_2026-07-18_095502_wkglfo.webp",
     quote: "Dreaming big and working quietly.", // Filled naturally
     rememberedFor: "The weird anonymous guy",
     futureAmbition: "Millionaire 😂🤲",
@@ -174,7 +175,7 @@ export const classmatesData: Classmate[] = [
     imageUrl:
       "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784350357/Screenshot_2026-07-18_054150_srdy0p.webp", // Add her picture URL here
     quote: "Don't be fake.",
-    positionHeld: "None",
+    positionHeld: "",
     rememberedFor: "Always speaking the truth.",
     futureAmbition: "Diplomat",
   },
@@ -185,7 +186,7 @@ export const classmatesData: Classmate[] = [
     imageUrl:
       "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784350358/Screenshot_2026-07-18_054220_xsa0yn.webp", // Add her picture URL here
     quote: "Be the best among the best.",
-    positionHeld: "None",
+    positionHeld: "",
     rememberedFor: "Being a loving girl.",
     futureAmbition: "Accountant",
   },
@@ -205,7 +206,8 @@ export const classmatesData: Classmate[] = [
     id: "nwigberi-amarachi-goodness",
     name: "Nwigberi Amarachi Goodness",
     nickname: "Amarachi",
-    imageUrl: "",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784367525/Screenshot_2026-07-18_095535_fijwhx.webp",
     quote: "Success comes from those who never give up.",
     positionHeld: "Student",
     rememberedFor: "My kindness, humility and the smile I bring to others.",
@@ -221,5 +223,44 @@ export const classmatesData: Classmate[] = [
     positionHeld: "Asst Head Boy",
     rememberedFor: "Lover of Power Rangers",
     futureAmbition: "Lawyer",
+  },
+  {
+    id: "obinna-praise-lotanna",
+    name: "Obinna Praise Lotanna",
+    nickname: "pmg",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784367524/Screenshot_2026-07-18_095441_xzt0l3.webp",
+    quote:
+      "The future belongs to those who believe in the beauty of their dreams. — Eleanor Roosevelt",
+    positionHeld: "",
+    rememberedFor:
+      "For my resilience and determination to overcome every challenge",
+    futureAmbition:
+      "To become a successful gynaecologist and provide quality healthcare for women and children while making a positive impact on society",
+  },
+
+  {
+    id: "onuelu-kikachukwu-marvelous",
+    name: "Onuelu Kikachukwu Marvelous",
+    nickname: "pirate",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784367523/Screenshot_2026-07-18_095521_lhtius.webp",
+    quote: "Life is too short to have regrets",
+    positionHeld: "", // Left blank as it wasn't provided
+    rememberedFor: "Being quiet",
+    futureAmbition: "To make the world a better place",
+  },
+
+  {
+    id: "great-adetutu",
+    name: "Great Adetutu",
+    nickname: "Anime boy",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784367523/Screenshot_2026-07-18_102642_mz8zyg.webp",
+    quote: "Come to me you weary and heavy lad, I will give you rest",
+    positionHeld: "",
+    rememberedFor: "Anime",
+    futureAmbition:
+      "Build classified inventions that are not to be shown to the world yet",
   },
 ];
