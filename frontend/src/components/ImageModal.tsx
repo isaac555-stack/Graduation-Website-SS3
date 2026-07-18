@@ -124,7 +124,7 @@ export function ImageModal({
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent
         showCloseButton={false}
-        className="fixed inset-0 top-0 left-0 translate-x-0 translate-y-0 z-50 w-screen h-screen h-[100dvh] max-w-none m-0 rounded-none border-none ring-0 bg-black p-0 flex flex-col items-center justify-center animate-none"
+        className="fixed inset-0 top-0 left-0 translate-x-0 translate-y-0 z-50 w-screen h-dvh max-w-none m-0 rounded-none border-none ring-0 bg-black p-0 flex flex-col items-center justify-center animate-none"
       >
         <div className="sr-only">
           <DialogDescription>
@@ -214,7 +214,7 @@ export function ImageModal({
           </div>
 
           {!imageLoading && (activeItem.title || activeItem.extra) && (
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pt-24 pb-12 px-6 flex flex-col items-center gap-1.5 justify-center z-20">
+            <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/90 via-black/50 to-transparent pt-24 pb-12 px-6 flex flex-col items-center gap-1.5 justify-center z-20">
               {activeItem.title && (
                 <DialogTitle className="w-full max-w-xl text-white text-base md:text-lg font-bold text-center drop-shadow-md">
                   {activeItem.title}

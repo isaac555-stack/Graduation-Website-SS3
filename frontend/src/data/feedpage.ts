@@ -347,12 +347,6 @@ export const photoGallery = [
     likes: 93,
   },
   {
-    id: 53,
-    caption: "Pure sunshine in her eyes",
-    url: "https://res.cloudinary.com/dwuq9g7x7/image/upload/f_auto,q_auto/v1784099555/IMG-20260714-WA0096_-_Sefia_szuvsf.webp",
-    likes: 78,
-  },
-  {
     id: 54,
     caption: "Catching the action in real time",
     url: "https://res.cloudinary.com/dwuq9g7x7/image/upload/f_auto,q_auto/v1784099555/motion_photo_3919821269158443444_-_Onuh_Nathan_msluyo.webp",
@@ -602,6 +596,36 @@ export const photoGallery = [
     id: 95,
     caption: "Bright smiles and a brighter future",
     url: "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784267301/WhatsApp_Image_2026-07-16_at_10.49.26_PM_a1xcrk.webp",
+    likes: 88,
+  },
+  {
+    id: 96,
+    caption: "Bright smiles and a brighter future",
+    url: "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784306157/Screenshot_2026-07-17_070524_qtcazf.webp",
+    likes: 88,
+  },
+  {
+    id: 97,
+    caption: "Bright smiles and a brighter future",
+    url: "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784326105/Snapchat-941621544_-_Emmanuel_Onyebuchi_sj8u37.jpg",
+    likes: 88,
+  },
+  {
+    id: 98,
+    caption: "Bright smiles and a brighter future",
+    url: "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784326105/IMG-20260711-WA0579_-_Emmanuel_Onyebuchi_ajjxpz.jpg",
+    likes: 88,
+  },
+  {
+    id: 99,
+    caption: "Bright smiles and a brighter future",
+    url: "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784326105/IMG-20260711-WA0380_-_Emmanuel_Onyebuchi_hqwiir.jpg",
+    likes: 88,
+  },
+  {
+    id: 100,
+    caption: "Bright smiles and a brighter future",
+    url: "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784326103/IMG-20260711-WA0350_-_Emmanuel_Onyebuchi_mlbfbb.jpg",
     likes: 88,
   },
 ];

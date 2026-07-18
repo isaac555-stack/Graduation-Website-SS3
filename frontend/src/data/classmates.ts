@@ -116,7 +116,7 @@ export const classmatesData: Classmate[] = [
     name: "Obiorah Favour",
     nickname: "Läst Børn",
     imageUrl:
-      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784306157/Screenshot_2026-07-17_070315_r605so.webp",
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784306157/Screenshot_2026-07-17_070223_ghzda3.webp",
     quote: "Fake it till u make it",
     rememberedFor: "Trouble maker",
     futureAmbition: "Nurse/Nursing",
@@ -130,13 +130,14 @@ export const classmatesData: Classmate[] = [
     quote: "Dreaming big and working quietly.", // Filled naturally
     rememberedFor: "The weird anonymous guy",
     futureAmbition: "Millionaire 😂🤲",
-    positionHeld: "Genius and fyne boy of SS1-3",
+    positionHeld: "",
   },
   {
     id: "saliu-sefia-arike",
     name: "Saliu Sefia Arike ",
     nickname: "Shubza ",
-    imageUrl: "",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784350357/Screenshot_2026-07-18_054024_lfvudj.webp",
     quote: "Never be afraid to try again ", // Filled naturally
     rememberedFor: "Beautiful eyes",
     futureAmbition: "Nursing",
@@ -159,7 +160,8 @@ export const classmatesData: Classmate[] = [
     id: "peace-omachonu",
     name: "Peace Omachonu",
     nickname: "Peaceful Omah",
-    imageUrl: "",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784350357/Screenshot_2026-07-18_054059_inabge.webp",
     quote: "Trust the process",
     rememberedFor: "For being a true friend",
     futureAmbition: "Nurse",
@@ -169,7 +171,8 @@ export const classmatesData: Classmate[] = [
     id: "esther-anthony-patrick",
     name: "Esther Anthony Patrick",
     nickname: "Short girl",
-    imageUrl: "", // Add her picture URL here
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784350357/Screenshot_2026-07-18_054150_srdy0p.webp", // Add her picture URL here
     quote: "Don't be fake.",
     positionHeld: "None",
     rememberedFor: "Always speaking the truth.",
@@ -179,7 +182,8 @@ export const classmatesData: Classmate[] = [
     id: "joyce",
     name: "Joyce Ayomipo",
     nickname: "Jaycee",
-    imageUrl: "", // Add her picture URL here
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784350358/Screenshot_2026-07-18_054220_xsa0yn.webp", // Add her picture URL here
     quote: "Be the best among the best.",
     positionHeld: "None",
     rememberedFor: "Being a loving girl.",

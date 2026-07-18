@@ -36,7 +36,7 @@ export function ClassmateCard({ classmate, onClick }: ClassmateCardProps) {
     >
       <Card className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-100 bg-white p-6 text-left shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-500 hover:-translate-y-2 hover:border-amber-200 hover:shadow-[0_20px_40px_rgba(245,158,11,0.1)] cursor-pointer w-full">
         {/* Decorative Top-Right Corner Highlight */}
-        <div className="absolute top-0 right-0 h-24 w-24 rounded-bl-full bg-gradient-to-br from-amber-500/5 to-transparent transition-all duration-500 group-hover:scale-110" />
+        <div className="absolute top-0 right-0 h-24 w-24 rounded-bl-full bg-linear-to-br from-amber-500/5 to-transparent transition-all duration-500 group-hover:scale-110" />
 
         {/* Top Section: Avatar & Info */}
         <div className="relative z-10 flex flex-col gap-5">
@@ -56,7 +56,7 @@ export function ClassmateCard({ classmate, onClick }: ClassmateCardProps) {
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   />
                   {/* Elegant Fallback with Amber Gradient */}
-                  <AvatarFallback className="bg-gradient-to-br from-amber-100 to-amber-200 text-amber-900 font-black text-base tracking-wider">
+                  <AvatarFallback className="bg-linear-to-br from-amber-100 to-amber-200 text-amber-900 font-black text-base tracking-wider">
                     {getInitials(classmate.name)}
                   </AvatarFallback>
                 </Avatar>
@@ -81,13 +81,13 @@ export function ClassmateCard({ classmate, onClick }: ClassmateCardProps) {
             </h3>
 
             {/* Senior Quote Section with Elegant Quote Icon */}
-            <div className="relative pt-1 min-h-[44px]">
+            <div className="relative pt-1 min-h-44px">
               {classmate.quote ? (
                 <p className="text-sm font-medium italic text-slate-500 line-clamp-2 pl-4 border-l-2 border-amber-200 group-hover:border-amber-400 transition-colors duration-300">
                   "{classmate.quote}"
                 </p>
               ) : (
-                <p className="text-sm font-semibold tracking-wider text-amber-600/60 uppercase text-xs pl-4 border-l-2 border-slate-100">
+                <p className="text-sm font-semibold tracking-wider text-amber-600/60 uppercase pl-4 border-l-2 border-slate-100">
                   Class of 2026
                 </p>
               )}

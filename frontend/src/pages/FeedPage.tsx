@@ -11,6 +11,9 @@ import { carouselSlides, photoGallery } from "@/data/feedpage";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
+// 1. IMPORT YOUR GOODLUCK IMAGE FROM ASSETS
+import goodluckImage from "@/assets/goodluck.webp"; // <-- Replace with your actual filename!
+
 // Cloudinary optimization helper
 const getOptimizedUrl = (url: string, width: number = 500) => {
   if (!url || !url.includes("cloudinary.com")) return url;
@@ -130,7 +133,6 @@ export default function FeedPage() {
                 <Sparkles className="size-3.5 fill-current" /> Featured
                 Spotlight
               </span>
-              {/* Heading styled with Display Font */}
               <h2 className="text-2xl md:text-3xl font-display font-black text-slate-900 mt-1">
                 Highlights from Art/Commercial Class
               </h2>
@@ -146,7 +148,7 @@ export default function FeedPage() {
           <VideoCard
             videoUrl="https://res.cloudinary.com/dwuq9g7x7/video/upload/f_auto,q_auto/v1784213176/Graduation1_gtxp9a.mp4"
             posterImageUrl="https://res.cloudinary.com/dwuq9g7x7/video/upload/c_scale,w_720,f_auto,q_auto/v1784213176/Graduation1_gtxp9a.jpg"
-            title="Graduation Day Memories 🎓"
+            title="Memories from Art/Commercial Class 🎓"
           />
         </div>
 
@@ -157,7 +159,6 @@ export default function FeedPage() {
               <span className="text-xs font-bold text-rose-600 uppercase tracking-widest flex items-center gap-1.5">
                 <Sparkles className="size-3.5 fill-current" /> Forever Memories
               </span>
-              {/* Heading styled with Display Font */}
               <h2 className="text-2xl md:text-3xl font-display font-black text-slate-900 mt-1">
                 Classmate Uploads
               </h2>
@@ -198,10 +199,9 @@ export default function FeedPage() {
                         className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105 select-none"
                       />
 
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-4 flex flex-col justify-end text-white transition-opacity duration-300 pointer-events-none">
-                        {/* Styled attribution string with display font elements */}
+                      <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent p-4 flex flex-col justify-end text-white transition-opacity duration-300 pointer-events-none">
                         <p
-                          className={`text-xs font-bold tracking-wide mb-1 drop-shadow-sm text-amber-400  "font-display italic"`}
+                          className={`text-xs font-bold tracking-wide mb-1 drop-shadow-sm text-amber-400 font-display italic`}
                         >
                           {authorName
                             ? `Captured by ${authorName}`
@@ -221,7 +221,32 @@ export default function FeedPage() {
           </div>
         </div>
 
-        {/* 4. SLIDER-SUPPORTING IMAGE LIGHTBOX */}
+        {/* 4. NEW GOODLUCK SIGN-OFF SECTION */}
+        {/* Adds spacing and a subtle background card */}
+        <div className="mt-12 mb-8 p-2 md:p-8 rounded-3xl bg-white shadow-sm border border-slate-100 flex flex-col items-center text-center">
+          <div className="w-full max-w-xl aspect-video rounded-2xl overflow-hidden mb-6 shadow-inner bg-slate-100">
+            <LazyLoadImage
+              alt="Goodluck everyone message from asset folder"
+              src={goodluckImage}
+              effect="blur"
+              className="w-full h-full object-cover select-none"
+            />
+          </div>
+
+          {/* Text styled with the elegant Display Font */}
+          <p className="text-2xl md:text-3xl font-display font-black text-slate-900 leading-tight">
+            It's been an unforgettable journey.
+            <br />
+            <span className="bg-linear-to-r from-amber-500 via-amber-600 to-rose-500 bg-clip-text text-transparent">
+              Goodluck Everyone! ❤️✨
+            </span>
+          </p>
+          <p className="text-xs md:text-sm text-slate-500 mt-3 max-w-md font-medium">
+            Cheers to the memories we've made and the brilliant futures ahead.
+          </p>
+        </div>
+
+        {/* 5. SLIDER-SUPPORTING IMAGE LIGHTBOX */}
         <ImageModal
           isOpen={activeGalleryType !== null && activeIndex !== -1}
           currentIndex={activeIndex}

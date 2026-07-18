@@ -52,7 +52,7 @@ export function ProfileModal({
           {/* 2. Global Close Trigger */}
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 md:top-8 md:right-8 p-3 rounded-full bg-slate-900/50 hover:bg-slate-900/90 text-white/80 hover:text-white transition-all cursor-pointer z-[70] border border-white/10 hover:border-amber-500/40 backdrop-blur-xl shadow-2xl hover:scale-105 active:scale-95 duration-300"
+            className="absolute top-5 right-5 md:top-8 md:right-8 p-3 rounded-full bg-slate-900/50 hover:bg-slate-900/90 text-white/80 hover:text-white transition-all cursor-pointer z-70 border border-white/10 hover:border-amber-500/40 backdrop-blur-xl shadow-2xl hover:scale-105 active:scale-95 duration-300"
           >
             <X className="size-5 md:size-6" />
           </button>
@@ -64,7 +64,7 @@ export function ProfileModal({
             className="relative w-full h-full md:h-[85vh] md:max-w-4xl lg:max-w-5xl bg-slate-950 border-none md:border md:border-white/10 md:rounded-[32px] shadow-[0_24px_80px_rgba(0,0,0,0.8)] overflow-y-auto md:overflow-hidden z-10 flex flex-col md:grid md:grid-cols-12"
           >
             {/* LEFT PORTRAIT SECTION */}
-            <div className="relative w-full aspect-[4/5] md:aspect-auto md:col-span-5 md:h-full bg-slate-950 flex flex-col justify-end shrink-0 overflow-hidden md:rounded-l-[31px]">
+            <div className="relative w-full aspect-4/5 md:aspect-auto md:col-span-5 md:h-full bg-slate-950 flex flex-col justify-end shrink-0 overflow-hidden md:rounded-l-[31px]">
               {/* This container morphs directly from the avatar container on the card */}
               <motion.div
                 layoutId={`card-image-container-${classmate.id}`}
@@ -78,7 +78,7 @@ export function ProfileModal({
                 />
               </motion.div>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent md:bg-gradient-to-r md:from-transparent md:via-slate-950/10 md:to-slate-950 z-10" />
+              <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/20 to-transparent md:bg-linear-to-r md:from-transparent md:via-slate-950/10 md:to-slate-950 z-10" />
 
               {/* Identity Card */}
               <div className="relative z-20 m-5 p-5 rounded-2xl bg-slate-950/10 border border-white/10 backdrop-blur-md shadow-lg">
@@ -141,7 +141,7 @@ export function ProfileModal({
                   </div>
 
                   {classmate.positionHeld && (
-                    <div className="space-y-1 sm:col-span-2 p-4 bg-gradient-to-br from-amber-500/5 to-transparent rounded-xl border border-amber-500/10">
+                    <div className="space-y-1 sm:col-span-2 p-4 bg-linear-to-br from-amber-500/5 to-transparent rounded-xl border border-amber-500/10">
                       <span className="text-[10px] uppercase font-bold text-amber-400 tracking-widest flex items-center gap-1.5">
                         <Award className="size-4" /> Position Held
                       </span>
@@ -153,7 +153,7 @@ export function ProfileModal({
                 </div>
 
                 {/* Memories Card */}
-                <div className="bg-gradient-to-br from-white/[0.04] to-transparent border border-white/10 rounded-xl p-5 shadow-md">
+                <div className="bg-linear-to-br from-white/0.04 to-transparent border border-white/10 rounded-xl p-5 shadow-md">
                   <span className="text-[10px] uppercase font-black text-amber-500 tracking-widest flex items-center gap-1.5 mb-2">
                     <Heart className="size-3.5 text-amber-500 fill-amber-500/10" />{" "}
                     Will Be Remembered For

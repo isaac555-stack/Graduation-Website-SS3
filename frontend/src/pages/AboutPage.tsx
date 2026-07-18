@@ -20,27 +20,41 @@ export default function AboutPage() {
       </div>
 
       {/* 2. THE CORE INSCRIPTION / MISSION STATEMENT */}
-      <div className="relative overflow-hidden rounded-3xl bg-slate-950 p-8 md:p-12 text-center text-white shadow-xl">
+      <div className="relative overflow-hidden rounded-3xl bg-slate-950 p-6 md:p-12 text-center text-white shadow-xl">
         {/* Decorative background gradients */}
         <div className="absolute top-0 left-1/4 size-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 size-72 bg-rose-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 max-w-xl mx-auto space-y-4">
-          <span className="text-6xl">🎓</span>
+        <div className="relative z-10 max-w-xl mx-auto space-y-4 text-center">
+          <span className="text-6xl block mb-2">🎓</span>
+
           <p className="text-2xl md:text-3xl font-display font-semibold italic text-amber-400 leading-relaxed">
             "Ad Astra Per Aspera"
           </p>
+
           <p className="text-xs md:text-sm font-bold tracking-widest uppercase text-slate-400">
             Through hardships to the stars
           </p>
-          <div className="h-[1px] w-24 bg-slate-800 mx-auto my-4" />
+
+          <div className="h-px w-24 bg-slate-800 mx-auto my-4" />
+
           <p className="text-slate-300 text-sm md:text-base leading-relaxed">
-            From classroom laughter, examinations, funs and jokes to our final
-            days as SS3 students, our journey has been unforgettable. This
-            platform serves as our living archive—a snapshot of who we were, the
-            dreams we hold, and the brilliant paths we are about to carve with
-            the help of God.
+            What started as classrooms filled with laughter, exams, and casual
+            jokes has brought us to our final moments as the SS3 graduating
+            class. This space is our collective archive—a beautiful reminder of
+            our youth, the dreams we carry, and the incredible futures we are
+            about to build, step by step, with God by our side.
           </p>
+          {/* Styled Developer/Author credit */}
+          <div className="pt-4">
+            <p className="text-xs font-medium tracking-wider uppercase text-amber-500/80">
+              Built with ❤️ by{" "}
+              <span className="font-bold text-amber-400">Isaac Opara</span>{" "}
+              <span className="text-[10px] bg-slate-900 border border-slate-800 px-2 py-0.5 rounded-full text-slate-400 normal-case ml-1">
+                AKA Ziko
+              </span>
+            </p>
+          </div>
         </div>
       </div>
 

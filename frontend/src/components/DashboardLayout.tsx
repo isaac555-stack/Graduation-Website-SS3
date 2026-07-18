@@ -8,6 +8,7 @@ import {
   Music,
   VolumeX,
   Info,
+  Sparkles,
 } from "lucide-react";
 import confetti from "canvas-confetti";
 import {
@@ -44,6 +45,7 @@ export function DashboardLayout({
 
   // MUSIC PLAYER STATES & REFERENCES
   const [isPlaying, setIsPlaying] = useState(false);
+  const [showMusicPrompt, setShowMusicPrompt] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const SONG_URL =
@@ -55,6 +57,11 @@ export function DashboardLayout({
     audio.loop = true;
     audio.preload = "auto";
     audioRef.current = audio;
+
+    // Trigger music notification invite shortly after entrance animation
+    const promptTimeout = setTimeout(() => {
+      setShowMusicPrompt(true);
+    }, 1800);
 
     // LISTEN FOR VIDEO PLAYBACK EVENT
     const handlePauseRequest = () => {
@@ -68,6 +75,7 @@ export function DashboardLayout({
 
     // Cleanup listeners and audio on unmount
     return () => {
+      clearTimeout(promptTimeout);
       window.removeEventListener("pause-background-audio", handlePauseRequest);
       if (audioRef.current) {
         audioRef.current.pause();
@@ -78,6 +86,9 @@ export function DashboardLayout({
 
   const toggleMusic = () => {
     if (!audioRef.current) return;
+
+    // Dismiss prompt banner once interacted with
+    setShowMusicPrompt(false);
 
     if (isPlaying) {
       audioRef.current.pause();
@@ -120,27 +131,42 @@ export function DashboardLayout({
         {/* DESKTOP SIDEBAR */}
         <Sidebar className="hidden md:flex border-r border-slate-200 bg-white">
           <SidebarHeader className="p-6">
-            <div className="flex items-center justify-between gap-2 px-2">
+            <div className="flex items-center justify-between gap-2 px-2 relative">
               {/* BRAND: Custom elegant heading font family applied */}
-              <span className="font-display font-black text-xl tracking-tight bg-gradient-to-r from-amber-500 to-amber-700 bg-clip-text text-transparent">
+              <span className="font-display font-black text-xl tracking-tight bg-linear-to-r from-amber-500 to-amber-700 bg-clip-text text-transparent">
                 SS3 Class 2k26
               </span>
 
-              <button
-                onClick={toggleMusic}
-                title={isPlaying ? "Pause Anthem" : "Play Anthem"}
-                className={`p-2 rounded-full border transition-all cursor-pointer ${
-                  isPlaying
-                    ? "bg-amber-50 border-amber-200 text-amber-600 animate-pulse"
-                    : "bg-slate-50 border-slate-200 text-slate-400 hover:text-slate-600"
-                }`}
-              >
-                {isPlaying ? (
-                  <VolumeX className="size-4" />
-                ) : (
-                  <Music className="size-4" />
+              <div className="relative">
+                <button
+                  onClick={toggleMusic}
+                  title={isPlaying ? "Pause Anthem" : "Play Anthem"}
+                  className={`p-2 rounded-full border transition-all cursor-pointer ${
+                    isPlaying
+                      ? "bg-amber-50 border-amber-200 text-amber-600 animate-pulse"
+                      : "bg-slate-50 border-slate-200 text-slate-400 hover:text-slate-600"
+                  }`}
+                >
+                  {isPlaying ? (
+                    <VolumeX className="size-4" />
+                  ) : (
+                    <Music className="size-4" />
+                  )}
+                </button>
+
+                {/* DESKTOP FLOATING PROMPT BANNER */}
+                {!isPlaying && showMusicPrompt && (
+                  <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 w-48 bg-slate-900 text-white p-3 rounded-xl shadow-xl text-xs font-medium z-50 border border-slate-800 animate-in fade-in slide-in-from-left-2 duration-300">
+                    <div className="absolute top-1/2 -left-1.5 -translate-y-1/2 w-3 h-3 bg-slate-900 rotate-45 border-l border-b border-slate-800" />
+                    <p className="flex items-center gap-1.5 text-amber-400 font-bold mb-0.5">
+                      <Sparkles className="size-3.5 shrink-0" /> Turn On Anthem!
+                    </p>
+                    <span className="text-slate-400 text-[11px]">
+                      Tap to catch the true graduation feeling. ✨
+                    </span>
+                  </div>
                 )}
-              </button>
+              </div>
             </div>
           </SidebarHeader>
 
@@ -206,12 +232,12 @@ export function DashboardLayout({
                   className="h-10 sm:h-12 md:h-14 w-auto object-contain block shrink-0 mt-0.5 sm:mt-0"
                 />
 
-                <div className="h-8 w-[1px] bg-slate-200 hidden sm:block" />
+                <div className="h-8 w-px bg-slate-200 hidden sm:block" />
 
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                     <h1 className="text-xl sm:text-2xl font-display font-black tracking-tight text-slate-900 truncate">
-                      <span className="bg-gradient-to-r from-amber-500 via-amber-600 to-rose-500 bg-clip-text text-transparent">
+                      <span className="bg-linear-to-r from-amber-500 via-amber-600 to-rose-500 bg-clip-text text-transparent">
                         Memories❤️
                       </span>
                     </h1>
@@ -235,20 +261,34 @@ export function DashboardLayout({
 
         {/* MOBILE BOTTOM NAVIGATION + FLOATING MUSIC SWITCH */}
         <div className="md:hidden">
-          <button
-            onClick={toggleMusic}
-            className={`fixed bottom-24 right-4 z-50 p-3.5 rounded-full shadow-lg border transition-all cursor-pointer ${
-              isPlaying
-                ? "bg-amber-500 border-amber-600 text-white animate-pulse"
-                : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50"
-            }`}
-          >
-            {isPlaying ? (
-              <VolumeX className="size-5" />
-            ) : (
-              <Music className="size-5" />
+          <div className="fixed bottom-24 right-4 z-50 flex flex-col items-end gap-3">
+            {/* MOBILE FLOATING PROMPT BANNER */}
+            {!isPlaying && showMusicPrompt && (
+              <div className="mr-1 max-w-200px bg-slate-900 text-white p-3 rounded-2xl shadow-xl text-xs font-medium border border-slate-800 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                <p className="flex items-center gap-1.5 text-amber-400 font-bold mb-0.5">
+                  <Sparkles className="size-3.5" /> Turn On Music!
+                </p>
+                <span className="text-slate-400 text-[11px]">
+                  Tap the button below for the true feeling.
+                </span>
+              </div>
             )}
-          </button>
+
+            <button
+              onClick={toggleMusic}
+              className={`p-3.5 rounded-full shadow-lg border transition-all cursor-pointer ${
+                isPlaying
+                  ? "bg-amber-500 border-amber-600 text-white animate-pulse"
+                  : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50"
+              }`}
+            >
+              {isPlaying ? (
+                <VolumeX className="size-5" />
+              ) : (
+                <Music className="size-5" />
+              )}
+            </button>
+          </div>
 
           <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-100 px-6 py-3.5 flex justify-between items-center z-40">
             {navItems.map((item) => {
