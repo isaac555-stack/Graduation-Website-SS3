@@ -189,4 +189,37 @@ export const classmatesData: Classmate[] = [
     rememberedFor: "Being a loving girl.",
     futureAmbition: "Accountant",
   },
+
+  {
+    id: "onyebuchi-emmanuel-chinonso",
+    name: "Onyebuchi Emmanuel Chinonso",
+    nickname: "Emmzy 😎",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784326104/IMG-20260711-WA0348_-_Emmanuel_Onyebuchi_bldicz.jpg",
+    quote: "Hala Madrid",
+    positionHeld: "Vision",
+    rememberedFor: "Onyeneji",
+    futureAmbition: "Footballer, Civil Engineer",
+  },
+  {
+    id: "nwigberi-amarachi-goodness",
+    name: "Nwigberi Amarachi Goodness",
+    nickname: "Amarachi",
+    imageUrl: "",
+    quote: "Success comes from those who never give up.",
+    positionHeld: "Student",
+    rememberedFor: "My kindness, humility and the smile I bring to others.",
+    futureAmbition: "Nurse & making a positive impact in the world",
+  },
+  {
+    id: "victor-chukwuemeka",
+    name: "Victor Chukwuemeka",
+    nickname: "Okanta the great",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784356446/Screenshot_2026-07-18_073247_xrlvla.webp",
+    quote: "Olorun maje (forbid)",
+    positionHeld: "Asst Head Boy",
+    rememberedFor: "Lover of Power Rangers",
+    futureAmbition: "Lawyer",
+  },
 ];

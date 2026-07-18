@@ -123,7 +123,7 @@ export function ProfileModal({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6 border-t border-white/10">
                   <div className="space-y-1">
                     <span className="text-[10px] uppercase font-bold text-slate-400 tracking-widest block">
-                      Registry Name
+                      Name
                     </span>
                     <p className="text-sm md:text-base font-semibold text-slate-100">
                       {classmate.name}
