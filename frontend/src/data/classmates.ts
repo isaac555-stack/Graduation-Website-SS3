@@ -18,7 +18,7 @@ export const classmatesData: Classmate[] = [
     imageUrl:
       "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784266261/Snapchat-1688348725_-_Grace_Alex_n42ei1.jpg",
     quote: "Keep smiling and stay positive",
-    rememberedFor: "Her bright and warm smiles 😁",
+    rememberedFor: "His bright and warm smiles 😁",
     futureAmbition: "Cyber security guru",
     positionHeld: "Headboy",
   },
