@@ -25,8 +25,9 @@ export const classmatesData: Classmate[] = [
     id: "charles-rejoice-c",
     name: "Charles Rejoice C.",
     nickname: "Royal Rezzie",
-    imageUrl: "",
-    quote: "Different is the new beautiful",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784405995/Screenshot_2026-07-18_211542_qcahwg.webp",
+    quote: "If God is all you have, God is all you need ",
     rememberedFor: "Being so dramatic and making people happy",
     futureAmbition: "Chartered Accountant and so much more",
     positionHeld: "Assistant head girl and president of Entrepreneurship club",
