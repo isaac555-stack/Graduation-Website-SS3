@@ -1,5 +1,5 @@
 import { type ReactNode, useEffect, useRef, useState } from "react";
-import { useLocation, Link } from "react-router-dom"; // IMPORT ROUTER HOOKS
+import { useLocation, Link } from "react-router-dom";
 import {
   Home,
   MessageSquare,
@@ -23,7 +23,6 @@ import {
   SidebarInset,
 } from "@/components/ui/sidebar";
 
-// 1. IMPORT LOGO FOR HEADER
 import logo from "@/assets/logo.png";
 
 interface DashboardLayoutProps {
@@ -31,7 +30,7 @@ interface DashboardLayoutProps {
 }
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
-  const location = useLocation(); // Replaces activeTab prop entirely
+  const location = useLocation();
   const confettiFired = useRef(false);
 
   // MUSIC PLAYER STATES & REFERENCES
@@ -43,28 +42,25 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     "https://res.cloudinary.com/dwuq9g7x7/video/upload/br_128,af_44100/v1784189488/Lord_Huron_-_The_Night_We_Met_LyricsUnderwater_mrjvdd.mp3";
 
   useEffect(() => {
-    // Instantiate the audio instance globally
+    // 1. Clean background initialization to avoid UI blockages
     const audio = new Audio(SONG_URL);
     audio.loop = true;
     audio.preload = "auto";
     audioRef.current = audio;
 
-    // Trigger music notification invite shortly after entrance animation
     const promptTimeout = setTimeout(() => {
       setShowMusicPrompt(true);
     }, 1800);
 
-    // LISTEN FOR VIDEO PLAYBACK EVENT
     const handlePauseRequest = () => {
       if (audioRef.current && !audioRef.current.paused) {
         audioRef.current.pause();
-        setIsPlaying(false); // Keeps the sidebar/floating UI state in sync!
+        setIsPlaying(false);
       }
     };
 
     window.addEventListener("pause-background-audio", handlePauseRequest);
 
-    // Cleanup listeners and audio on unmount
     return () => {
       clearTimeout(promptTimeout);
       window.removeEventListener("pause-background-audio", handlePauseRequest);
@@ -75,10 +71,10 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     };
   }, []);
 
+  // 2. Optimized toggle handles simple plays/pauses without hard loads
   const toggleMusic = () => {
     if (!audioRef.current) return;
 
-    // Dismiss prompt banner once interacted with
     setShowMusicPrompt(false);
 
     if (isPlaying) {
@@ -87,9 +83,6 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       const pauseVideoEvent = new Event("pause-active-video");
       window.dispatchEvent(pauseVideoEvent);
 
-      if (audioRef.current.readyState === 0) {
-        audioRef.current.load();
-      }
       audioRef.current.play().catch((err) => {
         console.log("Audio playback blocked:", err);
       });
@@ -97,19 +90,23 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     setIsPlaying(!isPlaying);
   };
 
+  // 3. Deferred execution to avoid forced synchronous layout reflows
   useEffect(() => {
     if (!confettiFired.current) {
-      confetti({
-        particleCount: 150,
-        spread: 80,
-        origin: { y: 0.6 },
-        colors: ["#f59e0b", "#10b981", "#ec4899", "#3b82f6", "#ffffff"],
-      });
+      const timer = setTimeout(() => {
+        confetti({
+          particleCount: 120, // Slightly lighter distribution profile
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ["#f59e0b", "#10b981", "#ec4899", "#3b82f6", "#ffffff"],
+        });
+      }, 400); // Gives mounting cycle space to stabilize first
+
       confettiFired.current = true;
+      return () => clearTimeout(timer);
     }
   }, []);
 
-  // Updated navigation layout array matching real URL route patterns
   const navItems = [
     { label: "Feed", path: "/", icon: Home },
     { label: "Class Profiles", path: "/profiles", icon: User },
@@ -199,7 +196,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         {/* FLOATING MUSIC CONTROLLER CONTAINER */}
         <div className="fixed bottom-24 right-4 z-50 flex flex-col items-end gap-3">
           {!isPlaying && showMusicPrompt && (
-            <div className="mr-1 max-w-[200px] bg-slate-900 text-white p-3 rounded-2xl shadow-xl text-xs font-medium border border-slate-800 animate-in fade-in slide-in-from-bottom-2 duration-300">
+            <div className="mr-1 max-w-50 bg-slate-900 text-white p-3 rounded-2xl shadow-xl text-xs font-medium border border-slate-800 animate-in fade-in slide-in-from-bottom-2 duration-300">
               <p className="flex items-center gap-1.5 text-amber-400 font-bold mb-0.5">
                 <Sparkles className="size-3.5" /> Turn On Music!
               </p>

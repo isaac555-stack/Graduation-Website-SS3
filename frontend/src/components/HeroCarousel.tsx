@@ -44,11 +44,11 @@ export function HeroCarousel({
         }}
         className="w-full group"
       >
-        <CarouselContent className="-ml-0">
+        <CarouselContent className="ml-0">
           {slides.map((slide, index) => (
             <CarouselItem
               key={index}
-              className="pl-0 relative w-full aspect-[4/5] sm:aspect-[16/10] md:aspect-[21/9] lg:aspect-[3/1]"
+              className="pl-0 relative w-full aspect-4/5 sm:aspect-16/10 md:aspect-21/9 lg:aspect-3/1"
             >
               {/* Background Image */}
               {slide.imageUrl ? (
@@ -64,7 +64,7 @@ export function HeroCarousel({
               )}
 
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-black/20" />
 
               {/* Text Overlay */}
               <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-6 text-center text-white z-10">
