@@ -91,20 +91,28 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   };
 
   // 3. Deferred execution to avoid forced synchronous layout reflows
+  // 3. Deferred execution to avoid forced synchronous layout reflows
   useEffect(() => {
-    if (!confettiFired.current) {
-      const timer = setTimeout(() => {
-        confetti({
-          particleCount: 120, // Slightly lighter distribution profile
-          spread: 80,
-          origin: { y: 0.6 },
-          colors: ["#f59e0b", "#10b981", "#ec4899", "#3b82f6", "#ffffff"],
-        });
-      }, 400); // Gives mounting cycle space to stabilize first
+    let timer: number;
 
-      confettiFired.current = true;
-      return () => clearTimeout(timer);
+    if (!confettiFired.current) {
+      timer = setTimeout(() => {
+        // Double check inside the block to avoid racing conditions during React 19 StrictMode
+        if (!confettiFired.current) {
+          confetti({
+            particleCount: 120, // Slightly lighter distribution profile
+            spread: 80,
+            origin: { y: 0.6 },
+            colors: ["#f59e0b", "#10b981", "#ec4899", "#3b82f6", "#ffffff"],
+          });
+          confettiFired.current = true;
+        }
+      }, 1000);
     }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, []);
 
   const navItems = [
