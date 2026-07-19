@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Tell Google exactly where the sitemap lives
+Sitemap: https://fhis2026.vercel.app/sitemap.xml
