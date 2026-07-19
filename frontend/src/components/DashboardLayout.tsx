@@ -1,4 +1,5 @@
 import { type ReactNode, useEffect, useRef, useState } from "react";
+import { useLocation, Link } from "react-router-dom"; // IMPORT ROUTER HOOKS
 import {
   Home,
   MessageSquare,
@@ -25,19 +26,12 @@ import {
 // 1. IMPORT LOGO FOR HEADER
 import logo from "@/assets/logo.png";
 
-export type TabValue = "feed" | "profiles" | "messages" | "about";
-
 interface DashboardLayoutProps {
   children: ReactNode;
-  activeTab: TabValue;
-  onTabChange: (tab: TabValue) => void;
 }
 
-export function DashboardLayout({
-  children,
-  activeTab,
-  onTabChange,
-}: DashboardLayoutProps) {
+export function DashboardLayout({ children }: DashboardLayoutProps) {
+  const location = useLocation(); // Replaces activeTab prop entirely
   const confettiFired = useRef(false);
 
   // MUSIC PLAYER STATES & REFERENCES
@@ -115,11 +109,12 @@ export function DashboardLayout({
     }
   }, []);
 
+  // Updated navigation layout array matching real URL route patterns
   const navItems = [
-    { label: "Feed", val: "feed" as TabValue, icon: Home }, // Contains the carousel and classmate picture uploads
-    { label: "Class Profiles", val: "profiles" as TabValue, icon: User }, // Class profiles tab
-    { label: "Messages", val: "messages" as TabValue, icon: MessageSquare },
-    { label: "About", val: "about" as TabValue, icon: Info }, // Explore tab for awards and other content
+    { label: "Feed", path: "/", icon: Home },
+    { label: "Class Profiles", path: "/profiles", icon: User },
+    { label: "Messages", path: "/messages", icon: MessageSquare },
+    { label: "About", path: "/about", icon: Info },
   ];
 
   return (
@@ -129,7 +124,6 @@ export function DashboardLayout({
         <Sidebar className="hidden md:flex border-r border-slate-200 bg-white">
           <SidebarHeader className="p-6">
             <div className="flex items-center justify-between gap-2 px-2 relative">
-              {/* BRAND: Custom elegant heading font family applied */}
               <span className="font-display font-black text-xl tracking-tight bg-linear-to-r from-amber-500 to-amber-700 bg-clip-text text-transparent">
                 SS3 Class 2k26
               </span>
@@ -142,17 +136,18 @@ export function DashboardLayout({
                 <SidebarMenu className="space-y-1">
                   {navItems.map((item) => {
                     const Icon = item.icon;
-                    const isActive = activeTab === item.val;
+                    const isActive = location.pathname === item.path;
                     return (
-                      <SidebarMenuItem key={item.val}>
-                        <SidebarMenuButton
-                          isActive={isActive}
-                          onClick={() => onTabChange(item.val)}
-                          className="w-full flex items-center gap-3 px-3 py-5 rounded-xl text-sm font-semibold transition-all cursor-pointer"
-                        >
-                          <Icon className="size-5 shrink-0" />
-                          <span>{item.label}</span>
-                        </SidebarMenuButton>
+                      <SidebarMenuItem key={item.path}>
+                        <Link to={item.path} className="w-full block">
+                          <SidebarMenuButton
+                            isActive={isActive}
+                            className="w-full flex items-center gap-3 px-3 py-5 rounded-xl text-sm font-semibold transition-all cursor-pointer"
+                          >
+                            <Icon className="size-5 shrink-0" />
+                            <span>{item.label}</span>
+                          </SidebarMenuButton>
+                        </Link>
                       </SidebarMenuItem>
                     );
                   })}
@@ -201,12 +196,10 @@ export function DashboardLayout({
           </main>
         </SidebarInset>
 
-        {/* MOBILE BOTTOM NAVIGATION + FLOATING MUSIC SWITCH */}
-
+        {/* FLOATING MUSIC CONTROLLER CONTAINER */}
         <div className="fixed bottom-24 right-4 z-50 flex flex-col items-end gap-3">
-          {/* MOBILE FLOATING PROMPT BANNER */}
           {!isPlaying && showMusicPrompt && (
-            <div className="mr-1 max-w-200px bg-slate-900 text-white p-3 rounded-2xl shadow-xl text-xs font-medium border border-slate-800 animate-in fade-in slide-in-from-bottom-2 duration-300">
+            <div className="mr-1 max-w-[200px] bg-slate-900 text-white p-3 rounded-2xl shadow-xl text-xs font-medium border border-slate-800 animate-in fade-in slide-in-from-bottom-2 duration-300">
               <p className="flex items-center gap-1.5 text-amber-400 font-bold mb-0.5">
                 <Sparkles className="size-3.5" /> Turn On Music!
               </p>
@@ -231,15 +224,17 @@ export function DashboardLayout({
             )}
           </button>
         </div>
+
+        {/* MOBILE BOTTOM NAVIGATION */}
         <div className="md:hidden">
           <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-100 px-6 py-3.5 flex justify-between items-center z-40">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = activeTab === item.val;
+              const isActive = location.pathname === item.path;
               return (
-                <button
-                  key={item.val}
-                  onClick={() => onTabChange(item.val)}
+                <Link
+                  key={item.path}
+                  to={item.path}
                   className={`flex flex-col items-center gap-1 cursor-pointer transition-all ${
                     isActive
                       ? "text-slate-950 scale-105"
@@ -248,7 +243,7 @@ export function DashboardLayout({
                 >
                   <Icon className="size-6" />
                   <span className="text-[10px] font-bold">{item.label}</span>
-                </button>
+                </Link>
               );
             })}
           </nav>
