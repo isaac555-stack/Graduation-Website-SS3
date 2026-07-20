@@ -26,9 +26,7 @@ export default function AboutPage() {
         <div className="absolute bottom-0 right-1/4 size-72 bg-rose-500/12 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 max-w-xl mx-auto space-y-5 text-center">
-          <span className="text-6xl block mb-2 drop-shadow-md animate-bounce animation-duration:[3s]">
-            🎓
-          </span>
+          <span className="text-6xl block mb-2 drop-shadow-md">🎓</span>
 
           {/* Premium Metallic Amber Gradient for the Motto */}
           <p className="text-2xl md:text-3xl font-display font-black tracking-tight italic bg-linear-to-r from-amber-200 via-amber-400 to-orange-500 bg-clip-text text-transparent leading-relaxed drop-shadow-xs">
