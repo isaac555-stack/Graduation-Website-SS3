@@ -20,18 +20,18 @@ export default function AboutPage() {
       </div>
 
       {/* 2. THE CORE INSCRIPTION / MISSION STATEMENT */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-black p-6 md:p-12 text-center text-white shadow-2xl border border-slate-900/50">
+      <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-slate-950 via-slate-900 to-black p-6 md:p-12 text-center text-white shadow-2xl border border-slate-900/50">
         {/* Decorative background gradients (Now popping out more against the true-black base) */}
         <div className="absolute top-0 left-1/4 size-72 bg-amber-500/12 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 size-72 bg-rose-500/12 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 max-w-xl mx-auto space-y-5 text-center">
-          <span className="text-6xl block mb-2 drop-shadow-md animate-bounce [animation-duration:3s]">
+          <span className="text-6xl block mb-2 drop-shadow-md animate-bounce animation-duration:[3s]">
             🎓
           </span>
 
           {/* Premium Metallic Amber Gradient for the Motto */}
-          <p className="text-2xl md:text-3xl font-display font-black tracking-tight italic bg-gradient-to-r from-amber-200 via-amber-400 to-orange-500 bg-clip-text text-transparent leading-relaxed drop-shadow-xs">
+          <p className="text-2xl md:text-3xl font-display font-black tracking-tight italic bg-linear-to-r from-amber-200 via-amber-400 to-orange-500 bg-clip-text text-transparent leading-relaxed drop-shadow-xs">
             "Ad Astra Per Aspera"
           </p>
 
@@ -40,7 +40,7 @@ export default function AboutPage() {
           </p>
 
           {/* Subtle fading gradient divider */}
-          <div className="h-px w-24 bg-gradient-to-r from-transparent via-slate-700 to-transparent mx-auto my-4" />
+          <div className="h-px w-24 bg-linear-to-r from-transparent via-slate-700 to-transparent mx-auto my-4" />
 
           <p className="text-slate-300 text-sm md:text-base leading-relaxed font-medium">
             What started as classrooms filled with laughter, exams, and casual
@@ -55,7 +55,7 @@ export default function AboutPage() {
             <p className="text-xs font-semibold tracking-wider uppercase text-slate-400 flex items-center justify-center gap-1.5">
               Built with <span className="text-rose-500 animate-pulse">❤️</span>{" "}
               by{" "}
-              <span className="font-extrabold bg-gradient-to-r from-amber-400 to-rose-400 bg-clip-text text-transparent drop-shadow-xs">
+              <span className="font-extrabold bg-linear-to-r from-amber-400 to-rose-400 bg-clip-text text-transparent drop-shadow-xs">
                 Isaac Opara
               </span>{" "}
               <span className="text-[10px] font-bold bg-slate-950/80 backdrop-blur-xs border border-slate-800/60 px-2.5 py-0.5 rounded-full text-amber-400/90 normal-case tracking-normal shadow-inner">

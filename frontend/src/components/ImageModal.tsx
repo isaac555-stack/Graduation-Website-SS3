@@ -126,7 +126,9 @@ export function ImageModal({
         showCloseButton={false}
         className="fixed inset-0 top-0 left-0 translate-x-0 translate-y-0 z-50 w-screen h-dvh max-w-none m-0 rounded-none border-none ring-0 bg-black p-0 flex flex-col items-center justify-center animate-none"
       >
+        {/* FIX: Always render accessible Title & Description for screen readers */}
         <div className="sr-only">
+          <DialogTitle>{activeItem.title || "Photo Viewer"}</DialogTitle>
           <DialogDescription>
             {activeItem.extra || "Class memory photo"}
           </DialogDescription>
@@ -213,12 +215,13 @@ export function ImageModal({
             {currentIndex + 1} / {items.length}
           </div>
 
+          {/* Visual Caption Overlay */}
           {!imageLoading && (activeItem.title || activeItem.extra) && (
             <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/90 via-black/50 to-transparent pt-24 pb-12 px-6 flex flex-col items-center gap-1.5 justify-center z-20">
               {activeItem.title && (
-                <DialogTitle className="w-full max-w-xl text-white text-base md:text-lg font-bold text-center drop-shadow-md">
+                <p className="w-full max-w-xl text-white text-base md:text-lg font-bold text-center drop-shadow-md">
                   {activeItem.title}
-                </DialogTitle>
+                </p>
               )}
             </div>
           )}
