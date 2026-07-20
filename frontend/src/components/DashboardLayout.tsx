@@ -40,7 +40,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const audioContextRef = useRef<AudioContext | null>(null);
 
   const SONG_URL =
-    "https://res.cloudinary.com/dwuq9g7x7/video/upload/br_128,af_44100/v1784189488/Lord_Huron_-_The_Night_We_Met_LyricsUnderwater_mrjvdd.mp3";
+    "https://res.cloudinary.com/dwuq9g7x7/video/upload/e_volume:300,br_128,af_44100/v1784189488/Lord_Huron_-_The_Night_We_Met_LyricsUnderwater_mrjvdd.mp3";
 
   useEffect(() => {
     // 1. Create the Audio instance
