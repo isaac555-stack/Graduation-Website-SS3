@@ -273,10 +273,10 @@ export const classmatesData: Classmate[] = [
     id: "nwachukwu-udodili-peculiar",
     name: "Nwachukwu Udodili Peculiar",
     nickname: "Pecky, pwing yhuddy",
-    imageUrl: "",
-    quote: "We love because it's the only true adventure.",
-    positionHeld:
+    imageUrl:
       "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784558960/Screenshot_2026-07-20_154417_gp6l1k.webp",
+    quote: "We love because it's the only true adventure.",
+    positionHeld: "",
     rememberedFor: "Her smiles and her dazzling eyes",
     futureAmbition: "Nurse",
   },
