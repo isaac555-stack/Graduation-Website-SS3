@@ -107,6 +107,17 @@ export const classmatesData: Classmate[] = [
     positionHeld: "Home makers' club president",
   },
   {
+    id: "okonkwo-favour-mmesoma",
+    name: "Okonkwo Favour Mmesoma",
+    nickname: "Favy's Smiles",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784570810/Screenshot_2026-07-20_190220_f5gdcq.webp",
+    quote: "It's fyn",
+    positionHeld: "Assembly Prefect",
+    rememberedFor: "The girl that loves Noodles (Noodles girl)",
+    futureAmbition: "Pediatrician",
+  },
+  {
     id: "onyebuchi-emmanuel-chinonso",
     name: "Onyebuchi Emmanuel Chinonso",
     nickname: "Emmzy 😎",
@@ -302,5 +313,31 @@ export const classmatesData: Classmate[] = [
     positionHeld: "",
     rememberedFor: "",
     futureAmbition: "To become great in life",
+  },
+
+  {
+    id: "maduabuchukwu-miracle-chinaelo",
+    name: "Maduabuchukwu Miracle Chinaelo",
+    nickname: "Mummy GO / The one minute woman",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784570809/Screenshot_2026-07-20_190340_cplsch.webp",
+    quote:
+      "The best way to heal is to forgive yourself and those who hurt you.",
+    positionHeld: "Assistant Chaplain Prefect",
+    rememberedFor:
+      "Greeting everyone even when there's nothing to discuss, and always putting mouth in business that doesn't concern her.",
+    futureAmbition:
+      "To become something worth living for in life and not misuse my time because it waits for nobody.",
+  },
+  {
+    id: "uche-emmanuel",
+    name: "Uche Emmanuel",
+    nickname: "EMMANUEL",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784099544/IMG-20260711-WA0078_-_Emmanuel_Uche_vxz84u.webp",
+    quote: "Do wetin sweet you",
+    positionHeld: "",
+    rememberedFor: "Being EMMANUEL (cool, funny etc)",
+    futureAmbition: "Let the future tell",
   },
 ];
