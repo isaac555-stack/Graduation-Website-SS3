@@ -43,11 +43,15 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     "https://res.cloudinary.com/dwuq9g7x7/video/upload/br_128,af_44100/v1784189488/Lord_Huron_-_The_Night_We_Met_LyricsUnderwater_mrjvdd.mp3";
 
   useEffect(() => {
-    // 1. Clean background initialization
-    const audio = new Audio(SONG_URL);
+    // 1. Create the Audio instance
+    const audio = new Audio();
+
+    // CRITICAL: Set crossOrigin BEFORE src
+    audio.crossOrigin = "anonymous";
+    audio.src = SONG_URL;
     audio.loop = true;
     audio.preload = "auto";
-    audio.volume = 1.0; // Ensure browser native volume is maximized
+    audio.volume = 1.0;
     audioRef.current = audio;
 
     const promptTimeout = setTimeout(() => {
