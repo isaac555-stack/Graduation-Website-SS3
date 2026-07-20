@@ -129,7 +129,7 @@ export default function FeedPage() {
         <div className="py-6">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <span className="text-xs font-bold text-rose-600 uppercase tracking-widest flex items-center gap-1.5">
+              <span className="text-xs font-bold text-rose-700 uppercase tracking-widest flex items-center gap-1.5">
                 <Sparkles className="size-3.5 fill-current" /> Featured
                 Spotlight
               </span>
@@ -156,7 +156,7 @@ export default function FeedPage() {
         <div className="py-8 border-t border-slate-200/60 mt-4">
           <div className="flex items-center gap-2 mb-6">
             <div>
-              <span className="text-xs font-bold text-rose-600 uppercase tracking-widest flex items-center gap-1.5">
+              <span className="text-xs font-bold text-rose-700 uppercase tracking-widest flex items-center gap-1.5">
                 <Sparkles className="size-3.5 fill-current" /> Forever Memories
               </span>
               <h2 className="text-2xl md:text-3xl font-display font-black text-slate-900 mt-1">

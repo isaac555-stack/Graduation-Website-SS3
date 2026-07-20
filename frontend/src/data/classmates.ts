@@ -234,7 +234,7 @@ export const classmatesData: Classmate[] = [
   {
     id: "obinna-praise-lotanna",
     name: "Obinna Praise Lotanna",
-    nickname: "pmg",
+    nickname: "PMG",
     imageUrl:
       "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784367524/Screenshot_2026-07-18_095441_xzt0l3.webp",
     quote:
