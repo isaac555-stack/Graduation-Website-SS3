@@ -82,7 +82,20 @@ export const classmatesData: Classmate[] = [
       "To become an Educator who'll contribute to building a better learning system",
     positionHeld: "Assistant Time keeper/Press Club Asst provost",
   },
-
+  {
+    id: "maduabuchukwu-miracle-chinaelo",
+    name: "Maduabuchukwu Miracle Chinaelo",
+    nickname: "Mummy GO / The one minute woman",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784570809/Screenshot_2026-07-20_190340_cplsch.webp",
+    quote:
+      "The best way to heal is to forgive yourself and those who hurt you.",
+    positionHeld: "Assistant Chaplain Prefect",
+    rememberedFor:
+      "Greeting everyone even when there's nothing to discuss, and always putting mouth in business that doesn't concern her.",
+    futureAmbition:
+      "To become something worth living for in life and not misuse my time because it waits for nobody.",
+  },
   // TIER 4: CLUB PRESIDENTS & SPECIAL ROLES
   {
     id: "opara isaac",
@@ -315,20 +328,6 @@ export const classmatesData: Classmate[] = [
     futureAmbition: "To become great in life",
   },
 
-  {
-    id: "maduabuchukwu-miracle-chinaelo",
-    name: "Maduabuchukwu Miracle Chinaelo",
-    nickname: "Mummy GO / The one minute woman",
-    imageUrl:
-      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784570809/Screenshot_2026-07-20_190340_cplsch.webp",
-    quote:
-      "The best way to heal is to forgive yourself and those who hurt you.",
-    positionHeld: "Assistant Chaplain Prefect",
-    rememberedFor:
-      "Greeting everyone even when there's nothing to discuss, and always putting mouth in business that doesn't concern her.",
-    futureAmbition:
-      "To become something worth living for in life and not misuse my time because it waits for nobody.",
-  },
   {
     id: "uche-emmanuel",
     name: "Uche Emmanuel",
