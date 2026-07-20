@@ -268,4 +268,39 @@ export const classmatesData: Classmate[] = [
     futureAmbition:
       "Build classified inventions that are not to be shown to the world yet",
   },
+
+  {
+    id: "nwachukwu-udodili-peculiar",
+    name: "Nwachukwu Udodili Peculiar",
+    nickname: "Pecky, pwing yhuddy",
+    imageUrl: "",
+    quote: "We love because it's the only true adventure.",
+    positionHeld:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784558960/Screenshot_2026-07-20_154417_gp6l1k.webp",
+    rememberedFor: "Her smiles and her dazzling eyes",
+    futureAmbition: "Nurse",
+  },
+  {
+    id: "nwobu-wisdom",
+    name: "Nwobu Wisdom",
+    nickname: "Pure wisdom",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784558960/Screenshot_2026-07-20_154403_d0rbot.webp",
+    quote:
+      "Keep on moving forward, if it hurt endure or if it itches scratch it",
+    positionHeld: "Class monitor",
+    rememberedFor: "For who I am",
+    futureAmbition: "Computer Engineering",
+  },
+  {
+    id: "obonyilo-goodness-ochanya",
+    name: "Obonyilo Goodness Ochanya",
+    nickname: "Aria",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784559347/Screenshot_2026-07-20_155415_goipdr.webp",
+    quote: "Bloom with grace, shine with kindness",
+    positionHeld: "",
+    rememberedFor: "",
+    futureAmbition: "To become great in life",
+  },
 ];

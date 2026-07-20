@@ -628,4 +628,10 @@ export const photoGallery = [
     url: "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784326103/IMG-20260711-WA0350_-_Emmanuel_Onyebuchi_mlbfbb.jpg",
     likes: 88,
   },
+  {
+    id: 101,
+    caption: "Bright smiles and a brighter future",
+    url: "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784558961/Screenshot_2026-07-20_154432_yto1fu.webp",
+    likes: 88,
+  },
 ];
