@@ -37,15 +37,17 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showMusicPrompt, setShowMusicPrompt] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
 
   const SONG_URL =
     "https://res.cloudinary.com/dwuq9g7x7/video/upload/br_128,af_44100/v1784189488/Lord_Huron_-_The_Night_We_Met_LyricsUnderwater_mrjvdd.mp3";
 
   useEffect(() => {
-    // 1. Clean background initialization to avoid UI blockages
+    // 1. Clean background initialization
     const audio = new Audio(SONG_URL);
     audio.loop = true;
     audio.preload = "auto";
+    audio.volume = 1.0; // Ensure browser native volume is maximized
     audioRef.current = audio;
 
     const promptTimeout = setTimeout(() => {
@@ -68,10 +70,37 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         audioRef.current.pause();
         audioRef.current = null;
       }
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+      }
     };
   }, []);
 
-  // 2. Optimized toggle handles simple plays/pauses without hard loads
+  // 2. Volume Boost handling via Gain Node
+  const setupAudioBoost = () => {
+    if (!audioRef.current || audioContextRef.current) return;
+
+    try {
+      const AudioCtx =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext })
+          .webkitAudioContext;
+      const ctx = new AudioCtx();
+      const source = ctx.createMediaElementSource(audioRef.current);
+      const gainNode = ctx.createGain();
+
+      // Set volume gain multiplier (e.g., 2.5 = 250% volume boost)
+      gainNode.gain.value = 2.5;
+
+      source.connect(gainNode);
+      gainNode.connect(ctx.destination);
+
+      audioContextRef.current = ctx;
+    } catch (err) {
+      console.log("Web Audio API boost fallback:", err);
+    }
+  };
+
   const toggleMusic = () => {
     if (!audioRef.current) return;
 
@@ -83,6 +112,15 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       const pauseVideoEvent = new Event("pause-active-video");
       window.dispatchEvent(pauseVideoEvent);
 
+      // Initialize gain boost on user gesture
+      setupAudioBoost();
+      if (
+        audioContextRef.current &&
+        audioContextRef.current.state === "suspended"
+      ) {
+        audioContextRef.current.resume();
+      }
+
       audioRef.current.play().catch((err) => {
         console.log("Audio playback blocked:", err);
       });
@@ -90,17 +128,14 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     setIsPlaying(!isPlaying);
   };
 
-  // 3. Deferred execution to avoid forced synchronous layout reflows
-  // 3. Deferred execution to avoid forced synchronous layout reflows
   useEffect(() => {
     let timer: number;
 
     if (!confettiFired.current) {
       timer = setTimeout(() => {
-        // Double check inside the block to avoid racing conditions during React 19 StrictMode
         if (!confettiFired.current) {
           confetti({
-            particleCount: 120, // Slightly lighter distribution profile
+            particleCount: 120,
             spread: 80,
             origin: { y: 0.6 },
             colors: ["#f59e0b", "#10b981", "#ec4899", "#3b82f6", "#ffffff"],
@@ -164,7 +199,6 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
         {/* MAIN CONTENT AREA */}
         <SidebarInset className="flex-1 flex flex-col min-w-0 bg-slate-50">
-          {/* TOP STICKY HEADER */}
           <div className="sticky top-0 z-40 bg-white/85 backdrop-blur-md py-3 md:py-4 px-4 md:px-8 border-b border-slate-200/60">
             <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-4">
               <div className="flex items-start sm:items-center gap-3 md:gap-4">
@@ -195,7 +229,6 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             </div>
           </div>
 
-          {/* PAGE CONTENT CONTAINER */}
           <main className="flex-1 pb-24 md:pb-8 max-w-7xl mx-auto w-full p-4 md:p-8">
             {children}
           </main>
