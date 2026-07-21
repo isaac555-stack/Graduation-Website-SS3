@@ -1,4 +1,4 @@
-import { useMemo } from "react"; // 1. Import useMemo
+import { useMemo } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
@@ -21,11 +21,17 @@ interface HeroCarouselProps {
   autoPlayInterval?: number;
 }
 
+// Optimized Cloudinary helper for hero carousel images (scales w_900 -> w_600)
+const getOptimizedHeroUrl = (url: string) => {
+  if (!url || !url.includes("cloudinary.com")) return url;
+  return url.replace("/upload/", "/upload/c_scale,w_600,f_auto,q_auto/");
+};
+
 export function HeroCarousel({
   slides,
   autoPlayInterval = 5000,
 }: HeroCarouselProps) {
-  // 2. Safely initialize the Autoplay plugin with useMemo
+  // Safely initialize the Autoplay plugin with useMemo
   const autoplayPlugin = useMemo(
     () => Autoplay({ delay: autoPlayInterval, stopOnInteraction: false }),
     [autoPlayInterval],
@@ -37,7 +43,6 @@ export function HeroCarousel({
   return (
     <div className="relative w-full overflow-hidden rounded-3xl">
       <Carousel
-        // 3. Pass the memoized plugin cleanly without accessing refs during render
         plugins={[autoplayPlugin]}
         opts={{
           loop: true,
@@ -45,49 +50,55 @@ export function HeroCarousel({
         className="w-full group"
       >
         <CarouselContent className="ml-0">
-          {slides.map((slide, index) => (
-            <CarouselItem
-              key={index}
-              className="pl-0 relative w-full aspect-4/5 sm:aspect-16/10 md:aspect-21/9 lg:aspect-3/1"
-            >
-              {/* Background Image */}
-              {slide.imageUrl ? (
-                <img
-                  src={slide.imageUrl}
-                  alt={slide.category}
-                  className="absolute inset-0 size-full object-cover brightness-[0.55] select-none"
-                />
-              ) : (
-                <div className="absolute inset-0 size-full bg-slate-900 flex items-center justify-center text-6xl">
-                  🎓
+          {slides.map((slide, index) => {
+            const isFirstSlide = index === 0;
+
+            return (
+              <CarouselItem
+                key={index}
+                className="pl-0 relative w-full aspect-4/5 sm:aspect-16/10 md:aspect-21/9 lg:aspect-3/1"
+              >
+                {/* Background Image */}
+                {slide.imageUrl ? (
+                  <img
+                    src={getOptimizedHeroUrl(slide.imageUrl)}
+                    alt={slide.category}
+                    loading={isFirstSlide ? "eager" : "lazy"}
+                    fetchPriority={isFirstSlide ? "high" : "auto"}
+                    className="absolute inset-0 size-full object-cover brightness-[0.55] select-none"
+                  />
+                ) : (
+                  <div className="absolute inset-0 size-full bg-slate-900 flex items-center justify-center text-6xl">
+                    🎓
+                  </div>
+                )}
+
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-black/20" />
+
+                {/* Text Overlay */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-6 text-center text-white z-10">
+                  <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-widest uppercase text-amber-400 drop-shadow-xs">
+                    {slide.category}
+                  </span>
+                  <h1
+                    className="mt-2 text-2xl sm:text-3xl md:text-5xl font-black tracking-tight leading-tight md:leading-none drop-shadow-md max-w-sm sm:max-w-xl md:max-w-3xl"
+                    dangerouslySetInnerHTML={{ __html: slide.title }}
+                  />
                 </div>
-              )}
 
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-black/20" />
-
-              {/* Text Overlay */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-6 text-center text-white z-10">
-                <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-widest uppercase text-amber-400 drop-shadow-sm">
-                  {slide.category}
-                </span>
-                <h1
-                  className="mt-2 text-2xl sm:text-3xl md:text-5xl font-black tracking-tight leading-tight md:leading-none drop-shadow-md max-w-sm sm:max-w-xl md:max-w-3xl"
-                  dangerouslySetInnerHTML={{ __html: slide.title }}
-                />
-              </div>
-
-              {/* Badge Indicator */}
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-white/95 backdrop-blur-md px-3.5 py-1.5 flex items-center gap-2 shadow-lg z-20">
-                <div className="size-5 sm:size-6 rounded-full bg-slate-900 flex items-center justify-center text-white text-[11px] sm:text-xs font-bold">
-                  {slide.badgeLetter || "🎓"}
+                {/* Badge Indicator */}
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-white/95 backdrop-blur-md px-3.5 py-1.5 flex items-center gap-2 shadow-lg z-20">
+                  <div className="size-5 sm:size-6 rounded-full bg-slate-900 flex items-center justify-center text-white text-[11px] sm:text-xs font-bold">
+                    {slide.badgeLetter || "🎓"}
+                  </div>
+                  <span className="text-[10px] sm:text-xs font-bold text-slate-800 whitespace-nowrap">
+                    {slide.badgeLabel}
+                  </span>
                 </div>
-                <span className="text-[10px] sm:text-xs font-bold text-slate-800 whitespace-nowrap">
-                  {slide.badgeLabel}
-                </span>
-              </div>
-            </CarouselItem>
-          ))}
+              </CarouselItem>
+            );
+          })}
         </CarouselContent>
 
         {/* NAVIGATION ARROWS */}

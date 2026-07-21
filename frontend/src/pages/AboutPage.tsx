@@ -1,4 +1,4 @@
-import { Sparkles, Users, Award, Camera } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 export default function AboutPage() {
   return (
@@ -61,54 +61,6 @@ export default function AboutPage() {
               </span>
             </p>
           </div>
-        </div>
-      </div>
-
-      {/* 3. CORE FEATURES GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Feature 1 */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm space-y-3">
-          <div className="p-3 bg-amber-50 text-amber-600 rounded-xl w-fit">
-            <Users className="size-6" />
-          </div>
-          <h3 className="text-lg font-display font-bold text-slate-900">
-            Digital Yearbook
-          </h3>
-          <p className="text-xs md:text-sm text-slate-700 leading-relaxed">
-            A beautiful, scrollable website hosting every classmate's identity,
-            final ambitions, quotes, and positions held. No paper book can
-            capture our live spirits quite like this.
-          </p>
-        </div>
-
-        {/* Feature 2 */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm space-y-3">
-          <div className="p-3 bg-rose-50 text-rose-600 rounded-xl w-fit">
-            <Camera className="size-6" />
-          </div>
-          <h3 className="text-lg font-display font-bold text-slate-900">
-            Classmate Uploads
-          </h3>
-          <p className="text-xs md:text-sm text-slate-700 leading-relaxed">
-            A visual wall of candid moments captured throughout our school days.
-            Browse through classmate-uploaded snapshots that keep our daily
-            memories alive.
-          </p>
-        </div>
-
-        {/* Feature 3 */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm space-y-3">
-          <div className="p-3 bg-indigo-50 text-indigo-600 rounded-xl w-fit">
-            <Award className="size-6" />
-          </div>
-          <h3 className="text-lg font-display font-bold text-slate-900">
-            Media Spotlights
-          </h3>
-          <p className="text-xs md:text-sm text-slate-700 leading-relaxed">
-            Listen to our curated background anthem while you browse, and watch
-            custom video highlights showcasing special moments from our art,
-            commercial, and science classes.
-          </p>
         </div>
       </div>
     </div>

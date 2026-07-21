@@ -1,39 +1,25 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { ChevronRight, Sparkles, Heart } from "lucide-react";
 import confetti from "canvas-confetti";
 
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { ImageModal } from "@/components/ImageModal";
-import { Skeleton } from "@/components/ui/skeleton";
 import { VideoCard } from "@/components/VideoCard";
 import { carouselSlides, photoGallery } from "@/data/feedpage";
 
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import goodluckImage from "@/assets/goodluck.webp";
 
-// 1. IMPORT YOUR GOODLUCK IMAGE FROM ASSETS
-import goodluckImage from "@/assets/goodluck.webp"; // <-- Replace with your actual filename!
-
-// Cloudinary optimization helper
-const getOptimizedUrl = (url: string, width: number = 500) => {
+// Optimized Cloudinary URL helper
+const getOptimizedUrl = (url: string, width: number = 400) => {
   if (!url || !url.includes("cloudinary.com")) return url;
   return url.replace("/upload/", `/upload/c_scale,w_${width},f_auto,q_auto/`);
 };
 
 export default function FeedPage() {
-  // Modal Index States
   const [activeGalleryType, setActiveGalleryType] = useState<
     "featured" | "gallery" | null
   >(null);
   const [activeIndex, setActiveIndex] = useState<number>(-1);
-
-  // Simulated loading state for the skeleton loaders
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1500);
-    return () => clearTimeout(timer);
-  }, []);
 
   const triggerConfetti = () => {
     confetti({
@@ -44,31 +30,24 @@ export default function FeedPage() {
     });
   };
 
-  // Extracts classmate names and cleanly discards Cloudinary random hashes & numbers
   const getAuthorFromUrl = (url: string): string | null => {
     if (!url || !url.includes("_-_")) return null;
     try {
-      // 1. Get the filename without extension (e.g., "Sefia_szuvsf" or "Donald_Spore_1_ltn4k9")
       const filename = url.split("/").pop() || "";
       const nameSection = filename.split("_-_")[1].split(".")[0];
-
-      // 2. Split into individual words
       const parts = nameSection.split("_");
 
-      // 3. Remove the last element if it is a 6-character Cloudinary hash (like "szuvsf")
       if (parts.length > 1) {
         const lastPart = parts[parts.length - 1];
         if (lastPart.length === 6 || /^[a-z0-9]{6}$/i.test(lastPart)) {
-          parts.pop(); // Toss the random hash out!
+          parts.pop();
         }
       }
 
-      // 4. Filter out any isolated numbers (like "1" in Donald_Spore_1)
       const cleanParts = parts.filter(
         (part) => isNaN(Number(part)) && part.length > 0,
       );
 
-      // 5. Capitalize nicely
       return cleanParts
         .map(
           (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
@@ -80,28 +59,21 @@ export default function FeedPage() {
     }
   };
 
-  // Safe Memoized Items for Lightbox Modal
   const galleryItems = useMemo(() => {
     return photoGallery.map((item) => {
       const author = getAuthorFromUrl(item.url);
       return {
         id: item.id,
         imageUrl: item.url.includes("cloudinary.com")
-          ? item.url.replace(
-              "/upload/",
-              "/upload/c_scale,w_1200,f_auto,q_auto/",
-            )
+          ? item.url.replace("/upload/", "/upload/c_scale,w_900,f_auto,q_auto/")
           : item.url,
         title: author
           ? `Captured by ${author}`
           : "Memories that never fade ❤️✨",
-        extra: item.caption, // Keeps descriptions in the modal view
+        extra: item.caption,
       };
     });
   }, []);
-
-  // Determine active item list to pass to modal
-  const modalItems = galleryItems;
 
   const handleOpenPhoto = (
     galleryType: "featured" | "gallery",
@@ -120,7 +92,7 @@ export default function FeedPage() {
   return (
     <div className="w-full min-h-screen bg-slate-50/50 pb-12">
       <div className="max-w-7xl">
-        {/* 1. REUSABLE HERO CAROUSEL */}
+        {/* 1. HERO CAROUSEL */}
         <div className="mb-8">
           <HeroCarousel slides={carouselSlides} autoPlayInterval={6000} />
         </div>
@@ -139,7 +111,8 @@ export default function FeedPage() {
             </div>
             <button
               onClick={triggerConfetti}
-              className="p-2 hover:bg-slate-100 rounded-full transition-colors group"
+              aria-label="Trigger confetti celebration"
+              className="p-2 hover:bg-slate-100 rounded-full transition-colors group cursor-pointer"
             >
               <ChevronRight className="size-6 text-slate-500 group-hover:text-slate-900 transition-colors" />
             </button>
@@ -147,7 +120,7 @@ export default function FeedPage() {
 
           <VideoCard
             videoUrl="https://res.cloudinary.com/dwuq9g7x7/video/upload/f_auto,q_auto/v1784213176/Graduation1_gtxp9a.mp4"
-            posterImageUrl="https://res.cloudinary.com/dwuq9g7x7/video/upload/c_scale,w_720,f_auto,q_auto/v1784213176/Graduation1_gtxp9a.jpg"
+            posterImageUrl="https://res.cloudinary.com/dwuq9g7x7/video/upload/c_scale,w_600,f_auto,q_auto/v1784213176/Graduation1_gtxp9a.jpg"
             title="Memories from Art/Commercial Class 🎓"
           />
         </div>
@@ -166,78 +139,59 @@ export default function FeedPage() {
           </div>
 
           <div className="columns-2 md:columns-4 gap-4 space-y-4">
-            {isLoading
-              ? Array.from({ length: 8 }).map((_, index) => {
-                  const heights = ["h-64", "h-80", "h-52", "h-72"];
-                  const randomHeight = heights[index % heights.length];
-                  return (
-                    <div
-                      key={index}
-                      className="break-inside-avoid mb-4 overflow-hidden rounded-xl"
-                    >
-                      <Skeleton
-                        className={`${randomHeight} w-full rounded-none`}
-                      />
+            {photoGallery.map((photo, idx) => {
+              const authorName = getAuthorFromUrl(photo.url);
+
+              return (
+                <div
+                  key={photo.id}
+                  onClick={() => handleOpenPhoto("gallery", idx)}
+                  className="break-inside-avoid mb-4 group relative overflow-hidden rounded-xl shadow-xs transition-transform duration-300 hover:scale-[1.02] hover:shadow-md cursor-pointer bg-slate-200/60 min-h-[180px]"
+                >
+                  <img
+                    alt={photo.caption || "Classmate uploaded memory"}
+                    src={getOptimizedUrl(photo.url, 400)}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105 select-none block"
+                  />
+
+                  <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent p-4 flex flex-col justify-end text-white transition-opacity duration-300 pointer-events-none">
+                    <p className="text-xs font-bold tracking-wide mb-1 drop-shadow-xs text-amber-400 font-display italic">
+                      {authorName
+                        ? `Captured by ${authorName}`
+                        : "Memories that never fade ❤️✨"}
+                    </p>
+
+                    <div className="flex items-center gap-1.5 text-rose-500">
+                      <Heart className="size-4 fill-current drop-shadow-xs" />
+                      <span className="text-[10px] text-white font-bold drop-shadow-xs">
+                        {photo.likes}
+                      </span>
                     </div>
-                  );
-                })
-              : photoGallery.map((photo, idx) => {
-                  const authorName = getAuthorFromUrl(photo.url);
-
-                  return (
-                    <div
-                      key={photo.id}
-                      onClick={() => handleOpenPhoto("gallery", idx)}
-                      className="break-inside-avoid mb-4 group relative overflow-hidden rounded-xl shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-md cursor-pointer bg-slate-200/40"
-                    >
-                      <LazyLoadImage
-                        alt={photo.caption}
-                        src={getOptimizedUrl(photo.url, 450)}
-                        effect="blur"
-                        threshold={350}
-                        wrapperClassName="w-full h-auto block min-h-[180px] bg-slate-200/30"
-                        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105 select-none"
-                      />
-
-                      <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent p-4 flex flex-col justify-end text-white transition-opacity duration-300 pointer-events-none">
-                        <p
-                          className={`text-xs font-bold tracking-wide mb-1 drop-shadow-sm text-amber-400 font-display italic`}
-                        >
-                          {authorName
-                            ? `Captured by ${authorName}`
-                            : "Memories that never fade ❤️✨"}
-                        </p>
-
-                        <div className="flex items-center gap-1.5 text-rose-500">
-                          <Heart className="size-4 fill-current drop-shadow-sm" />
-                          <span className="text-[10px] text-white font-bold drop-shadow-sm">
-                            {photo.likes}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* 4. NEW GOODLUCK SIGN-OFF SECTION */}
-        {/* Adds spacing and a subtle background card */}
-        <div className="mt-12 mb-8 p-2 md:p-8 rounded-3xl bg-white shadow-sm border border-slate-100 flex flex-col items-center text-center">
+        {/* 4. GOODLUCK SIGN-OFF SECTION */}
+        <div className="mt-12 mb-8 p-4 md:p-8 rounded-3xl bg-white shadow-xs border border-slate-100 flex flex-col items-center text-center">
           <div className="w-full max-w-xl aspect-video rounded-2xl overflow-hidden mb-6 shadow-inner bg-slate-100">
-            <LazyLoadImage
-              alt="Goodluck everyone message from asset folder"
+            <img
+              alt="Goodluck everyone"
               src={goodluckImage}
-              effect="blur"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover select-none"
             />
           </div>
 
-          {/* Text styled with the elegant Display Font */}
           <p className="text-xl md:text-3xl font-display font-black text-slate-900 leading-tight">
             It's been an unforgettable journey.
             <br />
-            <span className="bg-linear-to-r from-amber-500 via-amber-600 to-rose-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-amber-500 via-amber-600 to-rose-500 bg-clip-text text-transparent">
               Goodluck Everyone! ❤️✨
             </span>
           </p>
@@ -246,11 +200,11 @@ export default function FeedPage() {
           </p>
         </div>
 
-        {/* 5. SLIDER-SUPPORTING IMAGE LIGHTBOX */}
+        {/* 5. IMAGE LIGHTBOX MODAL */}
         <ImageModal
           isOpen={activeGalleryType !== null && activeIndex !== -1}
           currentIndex={activeIndex}
-          items={modalItems}
+          items={galleryItems}
           onIndexChange={(newIndex) => setActiveIndex(newIndex)}
           onClose={handleCloseModal}
         />

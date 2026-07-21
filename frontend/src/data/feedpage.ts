@@ -3,7 +3,7 @@ export const carouselSlides = [
     title: "We Made It! <br /> Graduation Day Gallery",
     category: "Class of 2026 Highlight",
     imageUrl:
-      "https://res.cloudinary.com/dwuq9g7x7/image/upload/f_auto,q_auto/v1784170822/IMG-20260711-WA0083_-_Donald_Spore_hlskxp.jpg",
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/c_scale,w_900,f_auto,q_auto/v1784170822/IMG-20260711-WA0083_-_Donald_Spore_hlskxp.jpg",
     badgeLabel: "Official Portraits",
     badgeLetter: "🎓",
   },
@@ -11,7 +11,7 @@ export const carouselSlides = [
     title: "The Signing Out <br /> Madness & Memories",
     category: "Unforgettable Moments",
     imageUrl:
-      "https://res.cloudinary.com/dwuq9g7x7/image/upload/f_auto,q_auto/v1784099538/IMG-20260212-WA0009_-_Favour_Ikagu_zvrzzp.webp",
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/c_scale,w_900,f_auto,q_auto/v1784099538/IMG-20260212-WA0009_-_Favour_Ikagu_zvrzzp.webp",
     badgeLabel: "The Lekki Headmaster",
     badgeLetter: "🖋️",
   },
@@ -19,7 +19,7 @@ export const carouselSlides = [
     title: "Laughter In Abundance",
     category: "Class Highlights",
     imageUrl:
-      "https://res.cloudinary.com/dwuq9g7x7/image/upload/f_auto,q_auto/v1784099536/IMG-20251013-WA0008_-_Favour_Ikagu_vk1ojt.webp",
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/c_scale,w_900,f_auto,q_auto/v1784099536/IMG-20251013-WA0008_-_Favour_Ikagu_vk1ojt.webp",
     badgeLabel: "Pure Joy",
     badgeLetter: "✨",
   },
@@ -27,7 +27,7 @@ export const carouselSlides = [
     title: "Friends Till The End",
     category: "Unbreakable Bonds",
     imageUrl:
-      "https://res.cloudinary.com/dwuq9g7x7/image/upload/f_auto,q_auto/v1784099535/IMG-20250926-WA0027_-_Favour_Ikagu_ubaqxi.webp",
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/c_scale,w_900,f_auto,q_auto/v1784099535/IMG-20250926-WA0027_-_Favour_Ikagu_ubaqxi.webp",
     badgeLabel: "Best Squad",
     badgeLetter: "🤝",
   },
@@ -35,7 +35,7 @@ export const carouselSlides = [
     title: "The Final Journey",
     category: "The Ultimate Finish",
     imageUrl:
-      "https://res.cloudinary.com/dwuq9g7x7/image/upload/f_auto,q_auto/v1784099613/Screenshot_2026-07-11_183846_y84bxv.webp",
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/c_scale,w_900,f_auto,q_auto/v1784099613/Screenshot_2026-07-11_183846_y84bxv.webp",
     badgeLabel: "Proud Grads",
     badgeLetter: "🌟",
   },
@@ -43,7 +43,7 @@ export const carouselSlides = [
     title: "Chasing Our Dreams",
     category: "Bright Futures",
     imageUrl:
-      "https://res.cloudinary.com/dwuq9g7x7/image/upload/f_auto,q_auto/v1784099533/IMG_2178_-_Akpudo_Chukwuka_fi4qr1.webp",
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/c_scale,w_900,f_auto,q_auto/v1784099533/IMG_2178_-_Akpudo_Chukwuka_fi4qr1.webp",
     badgeLabel: "Next Chapter",
     badgeLetter: "🚀",
   },
