@@ -141,7 +141,28 @@ export const classmatesData: Classmate[] = [
     rememberedFor: "Onyeneji",
     futureAmbition: "Footballer, Civil Engineer",
   },
-
+  {
+    id: "maduabuchi-rejoice",
+    name: "Maduabuchi Rejoice",
+    nickname: "Madass",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784720358/Screenshot_2026-07-22_123544_nzx6er.webp",
+    quote: "Enjoy every moment",
+    positionHeld: "Asst labour prefect",
+    rememberedFor: "My vibe, energy and bringing ideas",
+    futureAmbition: "Barrister",
+  },
+  {
+    id: "ashimonye-francis",
+    name: "Ashimonye Francis",
+    nickname: "A$H-MO₦€¥",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784170703/IMG_1852_-_Ebubedike_Hyacinth_btdwdq.jpg",
+    quote: "The only way to fail is to stop trying, so never give up",
+    positionHeld: "Labour prefect",
+    rememberedFor: "A playful and funny guy that everyone loves",
+    futureAmbition: "Journalist",
+  },
   // TIER 5: GENERAL CLASS MEMBERS
   {
     id: "nwigberi-amarachi-goodness",
