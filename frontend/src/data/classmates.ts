@@ -360,4 +360,16 @@ export const classmatesData: Classmate[] = [
     rememberedFor: "Being EMMANUEL (cool, funny etc)",
     futureAmbition: "Let the future tell",
   },
+
+  {
+    id: "chibuoke-ifeanyi-franklin",
+    name: "Chibuoke Ifeanyi Franklin",
+    nickname: "Frank Arizona",
+    imageUrl:
+      "https://res.cloudinary.com/dwuq9g7x7/image/upload/v1784801764/Screenshot_2026-07-22_190511_wj54x6.webp",
+    quote: "Driven by passion, fueled by determination.",
+    positionHeld: "",
+    rememberedFor: "Pablo 😂 with Igbo man vibes",
+    futureAmbition: "Automobile engineering",
+  },
 ];
